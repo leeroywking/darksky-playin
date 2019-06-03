@@ -31,7 +31,9 @@ const PORT = process.env.PORT;
 //Express middleware
 //Utilize expressJS functionality to parse the body of the request
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('public'));
+
 app.use(methodOverride((request, response) => {
   if (request.body && typeof request.body === 'object' && '_method' in request.body) {
     //look in the url encoded POST body and delete correct method
@@ -54,24 +56,43 @@ app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 app.set('view engine', 'ejs');
 
 // routes
-app.get('/', homePage);
+app.get('/', homePage)
+app.post('/submit', trial);
+
+app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
+
+
+// helper functions
 
 
 // route callbacks
-function homePage(request, response){
-    let returnObj = {}
-    .then(response.render('page/index', {indexObj: returnObject}))
+
+function homePage(request, response) {
+  response.render('pages/index')
 }
 
-const trial = () =>{
-darksky
-.coordinates({lat: 37.8267, lng: -122.423})
-.time('2019-05-30')
-.units('us')
-.language('en')
-.exclude('minutely,currently,hourly,alerts,flags')
-.get()
-.then(console.log)
-.catch(console.log)
+function trial(request, response) {
+  console.log(request.body)
+  let time = request.body.date
+  let GOOGURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.location}&key=${process.env.GOOGLE_API}`
+  superagent.get(GOOGURL)
+    .then(goog => {
+      let loc = goog.body.results[0].formatted_address
+      let latt = goog.body.results[0].geometry.location.lat
+      let long = goog.body.results[0].geometry.location.lng
+      darksky
+        .coordinates({ lat: `${latt}`, lng: `${long}` })
+        .time(`${time}`)
+        .units('us')
+        .language('en')
+        .exclude('minutely,currently,hourly,alerts,flags')
+        .get()
+        .then(reply => {
+          let replyObj = reply.daily.data[0]
+          replyObj.formattedLoc = loc
+          replyObj.time = new Date(replyObj.time * 1000).toDateString().split(' ').slice(0,4).join(' ')
+          response.render('pages/result', { indexObj: replyObj})
+        })
+        .catch(console.log)
+    })
 }
-trial();

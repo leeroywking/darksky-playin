@@ -1,0 +1,44 @@
+response.daily:
+{
+    data: [
+      {
+        time: 1559113200,
+        summary: 'Mostly cloudy starting in the evening.',
+        icon: 'partly-cloudy-night',
+        sunriseTime: 1559134320,
+        sunsetTime: 1559186715,
+        moonPhase: 0.84,
+        precipIntensity: 0,
+        precipIntensityMax: 0,
+        precipProbability: 0,
+        temperatureHigh: 63.14,
+        temperatureHighTime: 1559167200,
+        temperatureLow: 50.57,
+        temperatureLowTime: 1559224800,
+        apparentTemperatureHigh: 63.14,
+        apparentTemperatureHighTime: 1559167200,
+        apparentTemperatureLow: 50.57,
+        apparentTemperatureLowTime: 1559224800,
+        dewPoint: 50.99,
+        humidity: 0.82,
+        pressure: 1012.5,
+        windSpeed: 4.92,
+        windGust: 16.52,
+        windGustTime: 1559185200,
+        windBearing: 250,
+        cloudCover: 0.33,
+        uvIndex: 8,
+        uvIndexTime: 1559156400,
+        visibility: 8.49,
+        ozone: 362.81,
+        temperatureMin: 52.35,
+        temperatureMinTime: 1559192400,
+        temperatureMax: 63.14,
+        temperatureMaxTime: 1559167200,
+        apparentTemperatureMin: 52.35,
+        apparentTemperatureMinTime: 1559192400,
+        apparentTemperatureMax: 63.14,
+        apparentTemperatureMaxTime: 1559167200
+      }
+    ]
+  }
