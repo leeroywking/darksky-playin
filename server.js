@@ -72,7 +72,6 @@ function homePage(request, response) {
 }
 
 function renderWeather(request, response) {
-  console.log(request.body)
   let time = request.body.date
   let GOOGURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.location}&key=${process.env.GOOGLE_API}`
   superagent.get(GOOGURL)
@@ -88,12 +87,23 @@ function renderWeather(request, response) {
         .exclude('minutely,currently,hourly,alerts,flags')
         .get()
         .then(reply => {
+          let saveTime = new Date().getTime()
           let replyObj = reply.daily.data[0]
           replyObj.formattedLoc = loc
-          replyObj.time = new Date(replyObj.time * 1000).toDateString().split(' ').slice(0,4).join(' ')
+          replyObj.saveTime = saveTime
+          saveDayToDB(replyObj)
           response.render('pages/result', { indexObj: replyObj})
         })
         .catch(console.log)
     })
 }
 
+function saveDayToDB(eventObj){
+let fields = Object.keys(eventObj);
+let values = Object.values(eventObj).map(item => `'${item}'`);
+console.log(fields);
+console.log(values);
+let SQL1 = `INSERT INTO events (${fields}) VALUES (${values})`
+console.log(SQL1)
+client.query(SQL1)
+}
