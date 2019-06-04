@@ -57,7 +57,7 @@ app.set('view engine', 'ejs');
 
 // routes
 app.get('/', homePage)
-app.post('/submit', trial);
+app.post('/submit', renderWeather);
 
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
 
@@ -71,7 +71,7 @@ function homePage(request, response) {
   response.render('pages/index')
 }
 
-function trial(request, response) {
+function renderWeather(request, response) {
   console.log(request.body)
   let time = request.body.date
   let GOOGURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.location}&key=${process.env.GOOGLE_API}`
@@ -96,3 +96,4 @@ function trial(request, response) {
         .catch(console.log)
     })
 }
+
