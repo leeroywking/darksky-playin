@@ -15,10 +15,6 @@ const queryString = require('query-string')
 const moment = require('moment');
 moment().format();
 
-
-
-
-
 //App setup
 const app = express();
 const PORT = process.env.PORT;
@@ -38,7 +34,6 @@ app.use(methodOverride((request, response) => {
   }
 }));
 
-
 //Connecting to the database
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
@@ -52,9 +47,9 @@ app.set('view engine', 'ejs');
 
 // routes
 app.get('/', homePage);
-app.post('/addEvent', addEvent)
+app.post('/addEvent', addEvent);
 app.post('/submit', renderWeather);
-app.post('/mainview', mainView)
+app.post('/mainview', mainView);
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
 
 
@@ -72,14 +67,19 @@ function addEvent(request, response) {
 
 function mainView(request, response) {
   let responseObj = {}
+  let startingDate = (request.body.startingDate) ? new Date(request.body.startingDate) : new Date();
+  console.log(startingDate)
   let userName = request.body.userName;
-  let week = weekMaker(new Date());
+  let week = weekMaker(startingDate);
   let weekFormatted = week.map(day => `time='${day}'`).join(' OR ');
   let SQL = `SELECT * FROM events WHERE (userName='${userName}' AND (${weekFormatted}));`
   client.query(SQL)
     .then(answer => {
       responseObj.events = answer.rows;
       responseObj.userName = userName;
+      responseObj.startingDate = startingDate;
+      responseObj.ahead7 = new Date(startingDate.getFullYear(), startingDate.getMonth(), startingDate.getDate() + 7).toLocaleDateString()
+      responseObj.back7 = new Date(startingDate.getFullYear(), startingDate.getMonth(), startingDate.getDate() - 7).toLocaleDateString()
       response.render('pages/mainview', { mainviewObj: responseObj })
     })
 }

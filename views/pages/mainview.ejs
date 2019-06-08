@@ -8,3 +8,21 @@
     <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
     <button type="submit">Add a new Event</button>
   </form>
+
+  <form action="/mainview" method="post" id="submit">
+    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
+    <input type="hidden" name="startingDate" value="<%- mainviewObj.ahead7 %>">
+    <p><button type="submit">Jump ahead 1 week</button>
+  </form>
+
+  <form action="/mainview" method="post" id="submit">
+    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
+    <input type="hidden" name="startingDate" value="<%- mainviewObj.back7 %>">
+    <p><button type="submit">Jump back 1 week</button>
+  </form>
+
+  today
+  <%- mainviewObj.startingDate.toLocaleDateString() %>
+
+  7 in the future
+  <%- new Date(mainviewObj.startingDate.getFullYear(), mainviewObj.startingDate.getMonth(), mainviewObj.startingDate.getDate() + 7).toLocaleDateString() %>
