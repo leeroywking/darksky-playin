@@ -68,7 +68,6 @@ function addEvent(request, response) {
 function mainView(request, response) {
   let responseObj = {}
   let startingDate = (request.body.startingDate) ? new Date(request.body.startingDate) : new Date();
-  console.log(startingDate)
   let userName = request.body.userName;
   let week = weekMaker(startingDate);
   let weekFormatted = week.map(day => `time='${day}'`).join(' OR ');
