@@ -1,5 +1,10 @@
 <% mainviewObj.events.forEach(event => { %>
     <div id="<%- event.id %>"> 
-        <%- event.icon %>
+        <%- event.icon %> , <%- event.formattedLoc %> , <%- event.time %>
     </div>
 <% }) %>
+
+<form action="/addEvent" method="post" id="addEventForm">
+    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
+    <button type="submit">Add a new Event</button>
+  </form>

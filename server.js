@@ -52,7 +52,7 @@ app.set('view engine', 'ejs');
 
 // routes
 app.get('/', homePage);
-app.get('/addEvent', addEvent)
+app.post('/addEvent', addEvent)
 app.post('/submit', renderWeather);
 app.post('/mainview', mainView)
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
@@ -68,7 +68,9 @@ function homePage(request, response) {
 }
 
 function addEvent(request, response) {
-  response.render('pages/addevent')
+  let responseObj = {};
+  responseObj.userName = request.body.userName;
+  response.render('pages/addevent', {addEventObj: responseObj})
 }
 
 function mainView(request, response) {
@@ -79,6 +81,7 @@ function mainView(request, response) {
   client.query(SQL)
     .then(answer => {
       responseObj.events = answer.rows;
+      responseObj.userName = userName;
       response.render('pages/mainview', { mainviewObj : responseObj })
     })
 }

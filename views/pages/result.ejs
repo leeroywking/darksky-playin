@@ -6,6 +6,11 @@
     <div id="<%-keys[i]%>"><br><%-keys[i]%>: <%- values[i] %></div>
 <% } %>
 
+<form action="/mainview" method="post" id="submit">
+    <input type="hidden" name="userName" value="<%- indexObj.userName %>">
+    <p><button type="submit">Back to main view</button>
+  </form>
+
 <footer>
     <%- include('../layout/footer') %>
 </footer> 
