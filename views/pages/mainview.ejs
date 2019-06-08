@@ -1,6 +1,6 @@
 <% mainviewObj.events.forEach(event => { %>
     <div id="<%- event.id %>"> 
-        <%- event.icon %> , <%- event.formattedLoc %> , <%- event.time %>
+        <%- event.icon %> , <%- event.formattedloc %> , <%- new Date(event.time * 1000).toDateString() %>
     </div>
 <% }) %>
 

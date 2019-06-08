@@ -77,9 +77,9 @@ function mainView(request, response) {
   let responseObj = {}
   let userName = request.body.userName;
   let SQL = `SELECT * FROM events WHERE userName='${userName}';`
-  console.log(SQL);
   client.query(SQL)
     .then(answer => {
+      console.log(answer.rows[0])
       responseObj.events = answer.rows;
       responseObj.userName = userName;
       response.render('pages/mainview', { mainviewObj : responseObj })
