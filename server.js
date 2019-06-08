@@ -13,14 +13,9 @@ const darksky = new DarkSky(process.env.DARK_SKY);
 const request = require('request');
 const queryString = require('query-string')
 const moment = require('moment');
-// const parsed = queryString.parse(location.search);
 moment().format();
 
-// request('http://www.google.com', function (error, response, body) {
-//   console.log('error:', error); // Print the error if one occurred
-//   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-//   console.log('body:', body); // Print the HTML for the Google homepage.
-// });
+
 
 
 
@@ -56,9 +51,10 @@ app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 app.set('view engine', 'ejs');
 
 // routes
-app.get('/', homePage)
+app.get('/', homePage);
+app.get('/addEvent', addEvent)
 app.post('/submit', renderWeather);
-
+app.get('/mainview', mainView)
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
 
 
@@ -68,10 +64,25 @@ app.get('*', (request, response) => response.status(404).send('This page does no
 // route callbacks
 
 function homePage(request, response) {
-  response.render('pages/index')
+  response.render('pages/login')
+}
+
+function addEvent(request, response) {
+  response.render('pages/addevent')
+}
+
+function mainView(request, response) {
+  let userName = request.body.userName;
+  let SQL = `SELECT * FROM events WHERE userId=${userName}`
+  client.query(SQL)
+    .then(answer => {
+      console.log(answer)
+      response.render('pages/mainview', { mainviewObj: answer })
+    })
 }
 
 function renderWeather(request, response) {
+  let userName = request.body.userName
   let time = request.body.date
   let GOOGURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${request.body.location}&key=${process.env.GOOGLE_API}`
   superagent.get(GOOGURL)
@@ -97,12 +108,12 @@ function renderWeather(request, response) {
           for (let property in replyObj) {
             if (replyObj.hasOwnProperty(property)) {
               let regexUnixTime = /\d{10}/
-              let regexTimeCheck =/[tT]ime/
-              if(regexUnixTime.test(replyObj[property]) && regexTimeCheck.test(property)) {
+              let regexTimeCheck = /[tT]ime/
+              if (regexUnixTime.test(replyObj[property]) && regexTimeCheck.test(property)) {
                 replyObj[property] = new Date(replyObj[property] * 1000).toLocaleTimeString()
-              }else{console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`)}
+              } else { console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`) }
             }
-        }
+          }
           response.render('pages/result', { indexObj: replyObj })
         })
         .catch(console.log)

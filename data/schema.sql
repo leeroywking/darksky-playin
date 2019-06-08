@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS events;
+
 CREATE TABLE events(
 id SERIAL PRIMARY KEY,
 location VARCHAR(100),
@@ -40,5 +41,16 @@ apparentTemperatureMinTime VARCHAR(10),
 apparentTemperatureMax VARCHAR(10),
 apparentTemperatureMaxTime VARCHAR(10),
 formattedloc VARCHAR(50),
-saveTime VARCHAR(13)
+saveTime VARCHAR(13),
+userId VARCHAR(25),
 );
+
+
+DROP TABLE IF EXISTS userPeople;
+
+CREATE TABLE userPeople(
+id SERIAL PRIMARY KEY,
+userId VARCHAR(25),
+userName VARCHAR(25),
+dataFields VARCHAR(500)
+)
