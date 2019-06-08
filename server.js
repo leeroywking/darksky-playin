@@ -58,9 +58,6 @@ app.post('/mainview', mainView)
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
 
 
-// helper functions
-
-
 // route callbacks
 
 function homePage(request, response) {
@@ -70,19 +67,20 @@ function homePage(request, response) {
 function addEvent(request, response) {
   let responseObj = {};
   responseObj.userName = request.body.userName;
-  response.render('pages/addevent', {addEventObj: responseObj})
+  response.render('pages/addevent', { addEventObj: responseObj })
 }
 
 function mainView(request, response) {
   let responseObj = {}
   let userName = request.body.userName;
-  let SQL = `SELECT * FROM events WHERE userName='${userName}';`
+  let week = weekMaker(new Date());
+  let weekFormatted = week.map(day => `time='${day}'`).join(' OR ');
+  let SQL = `SELECT * FROM events WHERE (userName='${userName}' AND (${weekFormatted}));`
   client.query(SQL)
     .then(answer => {
-      console.log(answer.rows[0])
       responseObj.events = answer.rows;
       responseObj.userName = userName;
-      response.render('pages/mainview', { mainviewObj : responseObj })
+      response.render('pages/mainview', { mainviewObj: responseObj })
     })
 }
 
@@ -108,16 +106,18 @@ function renderWeather(request, response) {
           replyObj.formattedLoc = loc
           replyObj.saveTime = saveTime
           replyObj.userName = userName
+          replyObj.time = new Date(replyObj.time * 1000).toLocaleDateString()
           saveDayToDB(replyObj)
           replyObj.saveTime = new Date(saveTime)
-          replyObj.time = new Date(replyObj.time * 1000).toLocaleDateString()
           for (let property in replyObj) {
             if (replyObj.hasOwnProperty(property)) {
               let regexUnixTime = /\d{10}/
               let regexTimeCheck = /[tT]ime/
               if (regexUnixTime.test(replyObj[property]) && regexTimeCheck.test(property)) {
                 replyObj[property] = new Date(replyObj[property] * 1000).toLocaleTimeString()
-              } else { console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`) }
+              } else {
+                // console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`) 
+              }
             }
           }
           response.render('pages/result', { indexObj: replyObj })
@@ -126,13 +126,13 @@ function renderWeather(request, response) {
     })
 }
 
+
+// helper functions
+
 function saveDayToDB(eventObj) {
   let fields = Object.keys(eventObj);
   let values = Object.values(eventObj).map(item => `'${item}'`);
-  console.log(fields);
-  console.log(values);
   let SQL1 = `INSERT INTO events (${fields}) VALUES (${values})`
-  console.log(SQL1)
   client.query(SQL1)
 }
 
@@ -170,7 +170,7 @@ const weekMaker = (startDay) => {
   let week = []
   for (let i = 0; i < 7; i++) {
     week.push(
-      new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i)
+      new Date(startOfWeek.getFullYear(), startOfWeek.getMonth(), startOfWeek.getDate() + i).toLocaleDateString()
     )
   }
   return week;
