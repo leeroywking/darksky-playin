@@ -11,7 +11,9 @@ sunsetTime VARCHAR(10),
 moonPhase VARCHAR(10),
 precipIntensity VARCHAR(10),
 precipIntensityMax VARCHAR(10),
+precipIntensityMaxTime VARCHAR(10),
 precipProbability VARCHAR(10),
+precipType VARCHAR(10),
 temperatureHigh VARCHAR(10),
 temperatureHighTime VARCHAR(10),
 temperatureLow VARCHAR(10),
@@ -42,7 +44,7 @@ apparentTemperatureMax VARCHAR(10),
 apparentTemperatureMaxTime VARCHAR(10),
 formattedloc VARCHAR(50),
 saveTime VARCHAR(13),
-userId VARCHAR(25),
+userName VARCHAR(25)
 );
 
 

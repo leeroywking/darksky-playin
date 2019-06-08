@@ -54,7 +54,7 @@ app.set('view engine', 'ejs');
 app.get('/', homePage);
 app.get('/addEvent', addEvent)
 app.post('/submit', renderWeather);
-app.get('/mainview', mainView)
+app.post('/mainview', mainView)
 app.get('*', (request, response) => response.status(404).send('This page does not exist!'));
 
 
@@ -72,12 +72,14 @@ function addEvent(request, response) {
 }
 
 function mainView(request, response) {
+  let responseObj = {}
   let userName = request.body.userName;
-  let SQL = `SELECT * FROM events WHERE userId=${userName}`
+  let SQL = `SELECT * FROM events WHERE userName='${userName}';`
+  console.log(SQL);
   client.query(SQL)
     .then(answer => {
-      console.log(answer)
-      response.render('pages/mainview', { mainviewObj: answer })
+      responseObj.events = answer.rows;
+      response.render('pages/mainview', { mainviewObj : responseObj })
     })
 }
 
@@ -102,6 +104,7 @@ function renderWeather(request, response) {
           let replyObj = reply.daily.data[0]
           replyObj.formattedLoc = loc
           replyObj.saveTime = saveTime
+          replyObj.userName = userName
           saveDayToDB(replyObj)
           replyObj.saveTime = new Date(saveTime)
           replyObj.time = new Date(replyObj.time * 1000).toLocaleDateString()
