@@ -1,6 +1,14 @@
+<%- include('../layout/head') %>
+<body> 
+  <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
+  
+  <%- include('../layout/header') %>
+
 <form action="/submit" method="post" id="submit">
     <input type="hidden" name="userName" value="<%- addEventObj.userName %>">
     <input type="datetime-local" name="date" placeholder="YYYY-MM-DD">
     <input type="text" name="location" value="" placeholder="eg: Lynwood WA">
     <p><button type="submit">Get weather for this location on the date you chose</button>
   </form>
+
+<%- include('../layout/footer') %>
