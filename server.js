@@ -62,7 +62,7 @@ function homePage(request, response) {
 function addEvent(request, response) {
   let responseObj = {};
   responseObj.userName = request.body.userName;
-  response.render('pages/addevent', { addEventObj: responseObj })
+  response.render('pages/addevent', { mainviewObj: responseObj })
 }
 
 function mainView(request, response) {
@@ -119,7 +119,7 @@ function renderWeather(request, response) {
               }
             }
           }
-          response.render('pages/result', { indexObj: replyObj })
+          response.render('pages/result', { mainviewObj: replyObj })
         })
         .catch(console.log)
     })

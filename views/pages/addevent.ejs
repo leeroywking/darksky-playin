@@ -5,8 +5,8 @@
   <%- include('../layout/header') %>
 
 <form action="/submit" method="post" id="submit">
-    <input type="hidden" name="userName" value="<%- addEventObj.userName %>">
-    <input type="datetime-local" name="date" placeholder="YYYY-MM-DD">
+    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
+    <input type="date" name="date" placeholder="YYYY-MM-DD">
     <input type="text" name="location" value="" placeholder="eg: Lynwood WA">
     <p><button type="submit">Get weather for this location on the date you chose</button>
   </form>

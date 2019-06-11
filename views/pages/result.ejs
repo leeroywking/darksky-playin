@@ -4,15 +4,15 @@
   
   <%- include('../layout/header') %>
 
-<% let keys = Object.keys(indexObj) %>
-<% let values = Object.values(indexObj) %>
+<% let keys = Object.keys(mainviewObj) %>
+<% let values = Object.values(mainviewObj) %>
 
 <% for(let i = 0; i < keys.length; i++){ %>
     <div id="<%-keys[i]%>"><br><%-keys[i]%>: <%- values[i] %></div>
 <% } %>
 
 <form action="/mainview" method="post" id="submit">
-    <input type="hidden" name="userName" value="<%- indexObj.userName %>">
+    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
     <p><button type="submit">Back to main view</button>
   </form>
 
