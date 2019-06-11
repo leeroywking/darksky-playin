@@ -1,4 +1,10 @@
-<% mainviewObj.events.forEach(event => { %>
+<%- include('../layout/head') %>
+<body> 
+  <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
+  
+  <%- include('../layout/header') %>
+
+  <% mainviewObj.events.forEach(event => { %>
     <div id="<%- event.id %>"> 
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
     </div>
@@ -27,3 +33,5 @@
 
   7 in the future
   <%- new Date(mainviewObj.startingDate.getFullYear(), mainviewObj.startingDate.getMonth(), mainviewObj.startingDate.getDate() + 7).toLocaleDateString() %>
+
+  <%- include('../layout/footer') %>
