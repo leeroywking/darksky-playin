@@ -1,3 +1,9 @@
+<%- include('../layout/head') %>
+<body> 
+  <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
+  
+  <%- include('../layout/header') %>
+
 <div id="location"><br>location: <%- indexObj.formattedLoc %></div>
 <div id="time"><br>time: <%- new Date(indexObj.time * 1000).toDateString().split(' ').slice(0,4).join(' ') %></div>
 <div id="summary"><br>summary: <%- indexObj.summary %>,</div>
@@ -36,3 +42,5 @@
 <div id="apparentTemperatureMinTime"><br>apparentTemperatureMinTime: <%- new Date(indexObj.apparentTemperatureMinTime * 1000).toLocaleTimeString() %>,</div>
 <div id="apparentTemperatureMax"><br>apparentTemperatureMax: <%- indexObj.apparentTemperatureMax %>,</div>
 <div id="apparentTemperatureMaxTime"><br>apparentTemperatureMaxTime: <%- new Date(indexObj.apparentTemperatureMaxTime * 1000).toLocaleTimeString() %></div>
+
+<%- include('../layout/footer') %>

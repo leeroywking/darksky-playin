@@ -116,7 +116,7 @@ function renderWeather(request, response) {
               if (regexUnixTime.test(replyObj[property]) && regexTimeCheck.test(property)) {
                 replyObj[property] = new Date(replyObj[property] * 1000).toLocaleTimeString()
               } else {
-                // console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`) 
+                // console.log(` ${property}: ${replyObj[property]} is not a match (is it a string?)`)
               }
             }
           }

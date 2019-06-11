@@ -1,5 +1,12 @@
+<%- include('../layout/head') %>
+<%- include('../layout/header') %>
+<body> 
+    <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
+  
 <form action="/mainview" method="post" id="submit">
     <input type="text" name="userName" placeholder="username">
     <input type="hidden" name="startingday" value="<%  %>"
     <p><button type="submit">View this users Events</button>
   </form>
+
+  <%- include('../layout/footer') %>
