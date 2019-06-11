@@ -5,7 +5,7 @@
   <%- include('../layout/header') %>
 
   <% mainviewObj.events.forEach(event => { %>
-    <div id="<%- event.id %>"> 
+    <div id="<%- event.id %>" class="<%-event.dayOfWeek%>"> 
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
     </div>
 <% }) %>
