@@ -1,8 +1,21 @@
 <%- include('../layout/head') %>
-<%- include('../layout/header') %>
+<header>
+        <nav>
+          <a href="/" class="active">App Name Here</a>
+          <div id="menu">
+            <ul>
+              <li><i class="far fa-compass icon"></i></li>
+                <ul class="dropdown">
+                  <li><a href="/">Home</a></li>
+                  <li><a href="">Dashboard</a></li>
+                </ul>
+            </ul>
+          </div>
+        </nav>
+      </header>
 <body> 
     <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
-  
+
 <form action="/mainview" method="post" id="submit">
     <input type="text" name="userName" placeholder="username">
     <input type="hidden" name="startingday" value="<%  %>"
