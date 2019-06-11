@@ -74,6 +74,12 @@ function mainView(request, response) {
   let SQL = `SELECT * FROM events WHERE (userName='${userName}' AND (${weekFormatted}));`
   client.query(SQL)
     .then(answer => {
+      answer.rows.forEach(row => {
+        let date = row.time.split('/').map(number => parseInt(number));
+        console.log(date);
+        let week = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        row.dayOfWeek = week[new Date(date[2], date[0]-1, date[1]).getDay()]
+      })
       responseObj.events = answer.rows;
       responseObj.userName = userName;
       responseObj.startingDate = startingDate;
