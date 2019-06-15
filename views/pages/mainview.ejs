@@ -4,11 +4,7 @@
   <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
 
   <%- include('../layout/header') %>
-
-  <form action="/addEvent" method="post" id="addEventForm">
-    <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
-    <button type="submit">Add a new Event</button>
-  </form>
+  
 
   <form action="/mainview" method="post" id="submit">
     <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
@@ -32,7 +28,7 @@
     <div class="sunday day">
       Sunday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'sunday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -40,7 +36,7 @@
     <div class="monday day">
       Monday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'monday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -48,7 +44,7 @@
     <div class="tuesday day">
       Tuesday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'tuesday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -56,7 +52,7 @@
     <div class="wednesday day">
       Wednesday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'wednesday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -64,7 +60,7 @@
     <div class="thursday day">
       Thursday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'thursday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -72,7 +68,7 @@
     <div class="friday day">
       Friday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'friday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
@@ -80,7 +76,7 @@
     <div class="saturday day">
       Saturday
       <% mainviewObj.events.forEach(event => {  if(event.dayOfWeek === 'saturday') {%>
-      <div id="<%- event.id %>" class="<%-event.dayOfWeek%>">
+      <div id="<%- event.id %>" class="<%-event.dayOfWeek%> event">
         <%- event.icon %> , <%- event.formattedloc %> , <%- event.time %>
       </div>
       <% }}) %>
