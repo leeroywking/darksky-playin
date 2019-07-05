@@ -1,18 +1,17 @@
 <header>
   <nav>
-    <a href="/" class="active">App Name Here</a>
+    <a href="/" class="active" class="uppercase" class="hover-white">DarkSky-Playin</a>
     <div id="menu">
       <ul>
-        <li><i class="far fa-compass icon"></i></li>
+        <li><i class="far fa-compass icon hover-white"></i></li>
           <ul class="dropdown">
-            <li><a href="/">Home</a></li>
             <li><form action="/mainview" method="post" id="addEventForm">
               <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
-              <button type="submit">Dashboard</button>
+              <button type="submit" class="uppercase" class="hover-white">Dashboard</button>
             </form></li>
             <li><form action="/addEvent" method="post" id="addEventForm">
               <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
-              <button type="submit">Add a new Event</button>
+              <button type="submit" class="uppercase" class="hover-white">Add a new Event</button>
             </form></li>
           </ul>
       </ul>

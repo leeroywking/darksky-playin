@@ -1,25 +1,23 @@
 <%- include('../layout/head') %>
 <header>
         <nav>
-          <a href="/" class="active">App Name Here</a>
+          <a href="/" class="active uppercase hover-white">DarkSky-Playin</a>
           <div id="menu">
             <ul>
-              <li><i class="far fa-compass icon"></i></li>
-                <ul class="dropdown">
-                  <li><a href="/">Home</a></li>
-                  <li><a href="">Dashboard</a></li>
-                </ul>
+              <li><i class="far fa-compass icon hover-white"></i></li>
             </ul>
           </div>
         </nav>
       </header>
 <body> 
     <!-- left opening body tag in here in case I need to put an id for background photos to specific pages, closing body tag still in the footer partial -->
-
-<form action="/mainview" method="post" id="submit">
-    <input type="text" name="userName" placeholder="username">
-    <input type="hidden" name="startingday" value="<%  %>"
-    <p><button type="submit">View this users Events</button>
-  </form>
+<div id="log-in-div">
+  <p class="uppercase large-text"><u>Log In</u></p>
+  <form action="/mainview" method="post" id="submit">
+      <input type="text" name="userName" placeholder="username">
+      <input type="hidden" name="startingday" value="<%  %>">
+      <button type="submit" class="button">Let's Go</button>
+    </form>
+</div>
 
   <%- include('../layout/footer') %>

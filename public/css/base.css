@@ -1,17 +1,10 @@
 html {
-  background: lightgrey;
+  background: linear-gradient(to bottom left, #66ccff 0%, #ccff66 100%);
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  margin: 200px 0px;
-  height: 100%;
-  width: 100%;
-}
-
-#menu ul li{
-  display: inline;
-}
-
-.dropdown-menu{
-  display: none;
+  margin: 100px 0px;
+  font-family: 'Oswald', sans-serif;
 }
