@@ -11,11 +11,13 @@
   padding-top: 25px;
 }
 
-#log-in-div input{
+#log-in-div input, input{
   width: 220px;
   height: 30px;
   border-radius: 2px;
   margin: 35px 0px;
   font-size: 14px;
   text-align: center;
+  background: lightgray;
 }
+

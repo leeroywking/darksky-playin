@@ -1,20 +1,18 @@
 <header>
   <nav>
-    <a href="/" class="active" class="uppercase" class="hover-white">DarkSky-Playin</a>
-    <div id="menu">
-      <ul>
-        <li><i class="far fa-compass icon hover-white"></i></li>
-          <ul class="dropdown">
-            <li><form action="/mainview" method="post" id="addEventForm">
+    <a href="/" class="active uppercase hover-white">DarkSky-Playin</a>
+    <div class="dropdown">
+        <i onclick="myFunction()" class="far fa-compass dropbtn icon hover-white"></i>
+        <div id="myDropdown" class="dropdown-content">
+            <form id="first-dropdown" action="/mainview" method="post" class="addEventForm dropdown-items">
               <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
               <button type="submit" class="uppercase" class="hover-white">Dashboard</button>
-            </form></li>
-            <li><form action="/addEvent" method="post" id="addEventForm">
+            </form>
+            <form id="second-dropdown" action="/addEvent" method="post" class="addEventForm dropdown-items">
               <input type="hidden" name="userName" value="<%- mainviewObj.userName %>">
               <button type="submit" class="uppercase" class="hover-white">Add a new Event</button>
-            </form></li>
-          </ul>
-      </ul>
-    </div>
+            </form>
+        </div>
+      </div>
   </nav>
 </header>

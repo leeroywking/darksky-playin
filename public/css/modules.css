@@ -24,6 +24,34 @@ header, footer {
   color: black;
 }
 
+.dropbtn {
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover {
+  color: white;
+}
+
+.dropdown-content {
+  margin-top: 15px;
+  display: none;
+  position: absolute;
+  right: 0px;
+  height: 80px;
+}
+
+.dropdown-content button:hover {
+  cursor: pointer;
+  background: rgb(255, 255, 176);
+  color: black;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {
+  display:block;
+}
+
 .icon {
   position: absolute;
   right: 5px;
@@ -35,15 +63,15 @@ a {
   text-decoration: none;
 }
 
-.hover-white:hover{
+.hover-white:hover {
   color: white;
 }
 
-.uppercase{
+.uppercase {
   text-transform: uppercase;
 }
 
-.button {
+button {
   width: 220px;
   height: 40px;
   background: rgb(54, 54, 54);
